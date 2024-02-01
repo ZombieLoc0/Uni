@@ -1,0 +1,10 @@
+C:\dev\Escuela\Cliente-Server\Chat_Client\Chat_Client\bin\Debug\Chat_Client.exe.config
+C:\dev\Escuela\Cliente-Server\Chat_Client\Chat_Client\bin\Debug\Chat_Client.exe
+C:\dev\Escuela\Cliente-Server\Chat_Client\Chat_Client\bin\Debug\Chat_Client.pdb
+C:\dev\Escuela\Cliente-Server\Chat_Client\Chat_Client\obj\Debug\Chat_Client.csproj.AssemblyReference.cache
+C:\dev\Escuela\Cliente-Server\Chat_Client\Chat_Client\obj\Debug\Chat_Client.Form1.resources
+C:\dev\Escuela\Cliente-Server\Chat_Client\Chat_Client\obj\Debug\Chat_Client.Properties.Resources.resources
+C:\dev\Escuela\Cliente-Server\Chat_Client\Chat_Client\obj\Debug\Chat_Client.csproj.GenerateResource.cache
+C:\dev\Escuela\Cliente-Server\Chat_Client\Chat_Client\obj\Debug\Chat_Client.csproj.CoreCompileInputs.cache
+C:\dev\Escuela\Cliente-Server\Chat_Client\Chat_Client\obj\Debug\Chat_Client.exe
+C:\dev\Escuela\Cliente-Server\Chat_Client\Chat_Client\obj\Debug\Chat_Client.pdb
