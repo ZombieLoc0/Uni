@@ -1,0 +1,10 @@
+C:\Dev\Escuela\Distribuidos\Examen\JuegoServer\JuegoServer\bin\Debug\JuegoServer.exe.config
+C:\Dev\Escuela\Distribuidos\Examen\JuegoServer\JuegoServer\bin\Debug\JuegoServer.exe
+C:\Dev\Escuela\Distribuidos\Examen\JuegoServer\JuegoServer\bin\Debug\JuegoServer.pdb
+C:\Dev\Escuela\Distribuidos\Examen\JuegoServer\JuegoServer\obj\Debug\JuegoServer.csproj.AssemblyReference.cache
+C:\Dev\Escuela\Distribuidos\Examen\JuegoServer\JuegoServer\obj\Debug\JuegoServer.Form1.resources
+C:\Dev\Escuela\Distribuidos\Examen\JuegoServer\JuegoServer\obj\Debug\JuegoServer.Properties.Resources.resources
+C:\Dev\Escuela\Distribuidos\Examen\JuegoServer\JuegoServer\obj\Debug\JuegoServer.csproj.GenerateResource.cache
+C:\Dev\Escuela\Distribuidos\Examen\JuegoServer\JuegoServer\obj\Debug\JuegoServer.csproj.CoreCompileInputs.cache
+C:\Dev\Escuela\Distribuidos\Examen\JuegoServer\JuegoServer\obj\Debug\JuegoServer.exe
+C:\Dev\Escuela\Distribuidos\Examen\JuegoServer\JuegoServer\obj\Debug\JuegoServer.pdb
