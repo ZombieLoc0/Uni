@@ -42,14 +42,14 @@ namespace JuegoServer
 
         public string recieveP1()
         {
-            byte[] data = new byte[1024];
+            byte[] data = new byte[2];
             player1.Receive(data);
             return Encoding.ASCII.GetString(data);
         }
 
         public string recieveP2()
         {
-            byte[] data = new byte[1024];
+            byte[] data = new byte[2];
             player2.Receive(data);
             return Encoding.ASCII.GetString(data);
         }

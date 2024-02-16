@@ -52,18 +52,18 @@ namespace JuegoCliente
             switch (color)
             {
                 case 0:
-                    this.red[redIndex].BackColor = Color.Gray;
                     redIndex--;
+                    this.red[redIndex].BackColor = Color.Gray;
                     if (redIndex < 0) redIndex = 0;
                     break;
                 case 1:
-                    this.green[greenIndex].BackColor = Color.Gray;
                     greenIndex--;
+                    this.green[greenIndex].BackColor = Color.Gray;
                     if (greenIndex < 0) greenIndex = 0;
                     break;
                 case 2:
-                    this.blue[blueIndex].BackColor = Color.Gray;
                     blueIndex--;
+                    this.blue[blueIndex].BackColor = Color.Gray;
                     if (blueIndex < 0) blueIndex = 0;
                     break;
             }

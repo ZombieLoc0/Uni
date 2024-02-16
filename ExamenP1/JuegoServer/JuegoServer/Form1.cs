@@ -19,7 +19,7 @@ namespace JuegoServer
         int redCounter = 0;
         int greenCounter = 0;
 
-        int iColor;
+        int myColor;
 
         Game gameController;
         Network net;
@@ -47,8 +47,11 @@ namespace JuegoServer
             }
             else
             {
-                // Estamos en el hilo de la interfaz de usuario, puedes actualizar el control directamente.
+
                 debugBox.AppendText("Respuesta: " + message + '\n');
+
+                // Estamos en el hilo de la interfaz de usuario, puedes actualizar el control directamente.
+
             }
         }
 
@@ -60,12 +63,20 @@ namespace JuegoServer
 
             if (redCounter >= 3)
             {
-                if (iColor != 0) gameController.RemoveColor(0);
+                string msg = "";
+                if (myColor != 0)
+                {
+                    gameController.RemoveColor(0);
+                    msg = "-";
+                }
 
-                else gameController.AddColor(0);
-
-
-                net.SendColor(0.ToString());
+                else
+                {
+                    gameController.AddColor(0);
+                    msg = "+";
+                }
+                msg += '0';
+                net.SendColor(msg);
                 redCounter = 0;
             }
         }
@@ -76,11 +87,20 @@ namespace JuegoServer
 
             if (greenCounter >= 3)
             {
-                if (iColor != 1) gameController.RemoveColor(1);
+                string msg = "";
+                if (myColor != 1)
+                {
+                    gameController.RemoveColor(1);
+                    msg = "-";
+                }
 
-                else gameController.AddColor(1);
-
-                net.SendColor(1.ToString());
+                else
+                {
+                    gameController.AddColor(1);
+                    msg = "+";
+                }
+                msg += '1';
+                net.SendColor(msg);
                 greenCounter = 0;
             }
         }
@@ -91,11 +111,20 @@ namespace JuegoServer
 
             if (blueCounter >= 3)
             {
-                if (iColor != 2) gameController.RemoveColor(2);
+                string msg;
+                if (myColor != 2)
+                {
+                    gameController.RemoveColor(2);
+                    msg = "-";
+                }
 
-                else gameController.AddColor(2);
-
-                net.SendColor(2.ToString());
+                else
+                {
+                    gameController.AddColor(2);
+                    msg = "+";
+                }
+                msg += '2';
+                net.SendColor(msg);
                 blueCounter = 0;
             }
         }
@@ -105,17 +134,17 @@ namespace JuegoServer
         #region SelectColor
         private void checkRojo_CheckedChanged(object sender, EventArgs e)
         {
-            iColor = 0;
+            myColor = 0;
         }
 
         private void checkVerde_CheckedChanged_1(object sender, EventArgs e)
         {
-            iColor = 1;
+            myColor = 1;
         }
 
         private void checkAzul_CheckedChanged_1(object sender, EventArgs e)
         {
-            iColor = 2;
+            myColor = 2;
         }
 
         #endregion
@@ -125,8 +154,9 @@ namespace JuegoServer
             {
                 string colorRcv = net.recieveP1();
                 ShowDebug(colorRcv);
-                if(int.Parse(colorRcv) == net.p2Color || int.Parse(colorRcv) == iColor) gameController.RemoveColor(int.Parse(colorRcv));
-                else gameController.AddColor(int.Parse(colorRcv));
+
+                if (colorRcv[0] == '+') gameController.AddColor(colorRcv[1] - '0');
+                else gameController.RemoveColor(colorRcv[1] - '0');
 
                 net.SendP2(colorRcv);
             }
@@ -138,8 +168,10 @@ namespace JuegoServer
             {
                 string colorRcv = net.recieveP2();
                 ShowDebug(colorRcv);
-                if (int.Parse(colorRcv) == net.p1Color || int.Parse(colorRcv) == iColor) gameController.RemoveColor(int.Parse(colorRcv));
-                else gameController.AddColor(int.Parse(colorRcv));
+
+                if (colorRcv[0] == '+') gameController.AddColor(colorRcv[1] - '0');
+                else gameController.RemoveColor(colorRcv[1] - '0');
+
                 net.SendP1(colorRcv);
             }
         }

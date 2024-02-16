@@ -24,7 +24,7 @@ namespace JuegoCliente
 
         public string RecieveColor()
         {
-            byte[] data = new byte[1024];
+            byte[] data = new byte[2];
             realConn.Receive(data);
             return Encoding.ASCII.GetString(data);
         }

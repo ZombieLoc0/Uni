@@ -18,7 +18,7 @@ namespace JuegoCliente
         int blueCounter = 0;
         int redCounter = 0;
         int greenCounter = 0;
-        int iColor;
+        int myColor;
 
         Network server;
 
@@ -60,11 +60,20 @@ namespace JuegoCliente
 
             if (redCounter >= 3)
             {
-                if (iColor != 0) gameController.RemoveColor(0);
+                string msg = "";
+                if (myColor != 0)
+                {
+                    gameController.RemoveColor(0);
+                    msg = "-";
+                }
 
-                else gameController.AddColor(0);
-
-                server.SendColor(0.ToString());
+                else
+                {
+                    gameController.AddColor(0);
+                    msg = "+";
+                }
+                msg += '0';
+                server.SendColor(msg);
                 redCounter = 0;
             }
         }
@@ -75,11 +84,20 @@ namespace JuegoCliente
 
             if (greenCounter >= 3)
             {
-                if (iColor != 1) gameController.RemoveColor(1);
+                string msg = "";
+                if (myColor != 1)
+                {
+                    gameController.RemoveColor(1);
+                    msg = "-";
+                }
 
-                else gameController.AddColor(1);
-
-                server.SendColor(1.ToString());
+                else
+                {
+                    gameController.AddColor(1);
+                    msg = "+";
+                }
+                msg += '1';
+                server.SendColor(msg);
                 greenCounter = 0;
             }
         }
@@ -90,11 +108,20 @@ namespace JuegoCliente
 
             if (blueCounter >= 3)
             {
-                if (iColor != 2) gameController.RemoveColor(2);
+                string msg;
+                if (myColor != 2)
+                {
+                    gameController.RemoveColor(2);
+                    msg = "-";
+                }
 
-                else gameController.AddColor(2);
-
-                server.SendColor(2.ToString());
+                else
+                {
+                    gameController.AddColor(2);
+                    msg = "+";
+                }
+                msg += '2';
+                server.SendColor(msg);
                 blueCounter = 0;
             }
         }
@@ -104,17 +131,17 @@ namespace JuegoCliente
         #region SelectColor
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            iColor = 0;
+            myColor = 0;
         }
 
         private void checkVerde_CheckedChanged(object sender, EventArgs e)
         {
-            iColor = 1;
+            myColor = 1;
         }
 
         private void checkAzul_CheckedChanged(object sender, EventArgs e)
         {
-            iColor = 2;
+            myColor = 2;
         }
         #endregion
        
@@ -123,10 +150,11 @@ namespace JuegoCliente
             while (true)
             {
                 string msg = server.RecieveColor();
-                
-                if (iColor == int.Parse(msg)) { gameController.RemoveColor(iColor); }
-                else gameController.AddColor(int.Parse(msg));
-                //ShowDebug(msg);
+
+                if (msg[0] == '+') gameController.AddColor(msg[1] - '0');
+                else gameController.RemoveColor(msg[1] - '0');
+
+                ShowDebug(msg);
             }
         }
 
@@ -141,7 +169,7 @@ namespace JuegoCliente
             VerdeButton.Enabled = true;
 
             //Inicar la conexion
-            server = new Network(iColor.ToString());
+            server = new Network(myColor.ToString());
             Thread recivirAtaque = new Thread(new ThreadStart(recieveColor));
             recivirAtaque.Start();
         }
