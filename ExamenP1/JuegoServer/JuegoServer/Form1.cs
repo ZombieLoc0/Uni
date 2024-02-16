@@ -19,6 +19,8 @@ namespace JuegoServer
         int redCounter = 0;
         int greenCounter = 0;
 
+        int iColor;
+
         Game gameController;
         Network net;
         public Form1()
@@ -34,19 +36,36 @@ namespace JuegoServer
         private void Form1_Load(object sender, EventArgs e)
         {
             net = new Network();
-            Thread tP1 = new Thread(new ThreadStart(recieveP1));
-            tP1.Start();
-            Thread tP2 = new Thread(new ThreadStart(recieveP1));
-            tP2.Start();
         }
+
+        private void ShowDebug(string message)
+        {
+            if (debugBox.InvokeRequired)
+            {
+                // Si estamos en un hilo diferente, invoca el método en el hilo de la interfaz de usuario.
+                debugBox.BeginInvoke(new Action(() => ShowDebug(message)));
+            }
+            else
+            {
+                // Estamos en el hilo de la interfaz de usuario, puedes actualizar el control directamente.
+                debugBox.AppendText("Respuesta: " + message + '\n');
+            }
+        }
+
+        #region Buttons
 
         private void RojoButton_Click(object sender, EventArgs e)
         {
             redCounter++;
 
-            if(redCounter >= 3)
+            if (redCounter >= 3)
             {
-                gameController.AddColor("0");
+                if (iColor != 0) gameController.RemoveColor(0);
+
+                else gameController.AddColor(0);
+
+
+                net.SendColor(0.ToString());
                 redCounter = 0;
             }
         }
@@ -57,7 +76,11 @@ namespace JuegoServer
 
             if (greenCounter >= 3)
             {
-                gameController.AddColor("1");
+                if (iColor != 1) gameController.RemoveColor(1);
+
+                else gameController.AddColor(1);
+
+                net.SendColor(1.ToString());
                 greenCounter = 0;
             }
         }
@@ -68,17 +91,44 @@ namespace JuegoServer
 
             if (blueCounter >= 3)
             {
-                gameController.AddColor("2");
+                if (iColor != 2) gameController.RemoveColor(2);
+
+                else gameController.AddColor(2);
+
+                net.SendColor(2.ToString());
                 blueCounter = 0;
             }
         }
 
+        #endregion
+
+        #region SelectColor
+        private void checkRojo_CheckedChanged(object sender, EventArgs e)
+        {
+            iColor = 0;
+        }
+
+        private void checkVerde_CheckedChanged_1(object sender, EventArgs e)
+        {
+            iColor = 1;
+        }
+
+        private void checkAzul_CheckedChanged_1(object sender, EventArgs e)
+        {
+            iColor = 2;
+        }
+
+        #endregion
         private void recieveP1()
         {
             while(true)
             {
                 string colorRcv = net.recieveP1();
-                gameController.AddColor(colorRcv);
+                ShowDebug(colorRcv);
+                if(int.Parse(colorRcv) == net.p2Color || int.Parse(colorRcv) == iColor) gameController.RemoveColor(int.Parse(colorRcv));
+                else gameController.AddColor(int.Parse(colorRcv));
+
+                net.SendP2(colorRcv);
             }
         }
         
@@ -87,8 +137,27 @@ namespace JuegoServer
             while(true)
             {
                 string colorRcv = net.recieveP2();
-                gameController.AddColor(colorRcv);
+                ShowDebug(colorRcv);
+                if (int.Parse(colorRcv) == net.p1Color || int.Parse(colorRcv) == iColor) gameController.RemoveColor(int.Parse(colorRcv));
+                else gameController.AddColor(int.Parse(colorRcv));
+                net.SendP1(colorRcv);
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            checkAzul.Enabled = false;
+            checkRojo.Enabled = false;
+            checkVerde.Enabled = false;
+
+            AzulButton.Enabled = true;
+            RojoButton.Enabled = true;
+            VerdeButton.Enabled = true;
+
+            Thread tP1 = new Thread(new ThreadStart(recieveP1));
+            tP1.Start();
+            Thread tP2 = new Thread(new ThreadStart(recieveP2));
+            tP2.Start();
         }
     }
 }

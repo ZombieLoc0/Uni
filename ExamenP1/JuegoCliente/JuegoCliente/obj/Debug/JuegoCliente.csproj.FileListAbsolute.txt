@@ -8,3 +8,13 @@ C:\Dev\Escuela\Distribuidos\Examen\JuegoCliente\JuegoCliente\obj\Debug\JuegoClie
 C:\Dev\Escuela\Distribuidos\Examen\JuegoCliente\JuegoCliente\obj\Debug\JuegoCliente.csproj.CoreCompileInputs.cache
 C:\Dev\Escuela\Distribuidos\Examen\JuegoCliente\JuegoCliente\obj\Debug\JuegoCliente.exe
 C:\Dev\Escuela\Distribuidos\Examen\JuegoCliente\JuegoCliente\obj\Debug\JuegoCliente.pdb
+C:\dev\Uni\ExamenP1\JuegoCliente\JuegoCliente\bin\Debug\JuegoCliente.exe.config
+C:\dev\Uni\ExamenP1\JuegoCliente\JuegoCliente\bin\Debug\JuegoCliente.exe
+C:\dev\Uni\ExamenP1\JuegoCliente\JuegoCliente\bin\Debug\JuegoCliente.pdb
+C:\dev\Uni\ExamenP1\JuegoCliente\JuegoCliente\obj\Debug\JuegoCliente.csproj.AssemblyReference.cache
+C:\dev\Uni\ExamenP1\JuegoCliente\JuegoCliente\obj\Debug\JuegoCliente.Form1.resources
+C:\dev\Uni\ExamenP1\JuegoCliente\JuegoCliente\obj\Debug\JuegoCliente.Properties.Resources.resources
+C:\dev\Uni\ExamenP1\JuegoCliente\JuegoCliente\obj\Debug\JuegoCliente.csproj.GenerateResource.cache
+C:\dev\Uni\ExamenP1\JuegoCliente\JuegoCliente\obj\Debug\JuegoCliente.csproj.CoreCompileInputs.cache
+C:\dev\Uni\ExamenP1\JuegoCliente\JuegoCliente\obj\Debug\JuegoCliente.exe
+C:\dev\Uni\ExamenP1\JuegoCliente\JuegoCliente\obj\Debug\JuegoCliente.pdb

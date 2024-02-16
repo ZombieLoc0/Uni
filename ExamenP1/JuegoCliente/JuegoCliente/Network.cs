@@ -9,9 +9,9 @@ using JuegoCliente;
 
 namespace JuegoCliente
 {
-    internal class Network
+    internal class Network      
     {
-        static string ip = "148.239.105.190";
+        static string ip = "127.0.0.1";
         static int port = 11001;
 
         IPEndPoint conection = new IPEndPoint(IPAddress.Parse(ip), port);
@@ -25,7 +25,7 @@ namespace JuegoCliente
         public string RecieveColor()
         {
             byte[] data = new byte[1024];
-            int dSize = realConn.Receive(data);
+            realConn.Receive(data);
             return Encoding.ASCII.GetString(data);
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -25,43 +26,43 @@ namespace JuegoServer
             this.green = green;
         }
 
-        public void AddColor(string color)
+        public void AddColor(int color)
         {
             switch (color)
             {
-                case "0":
+                case 0:
                     this.red[redIndex].BackColor = Color.Red;
                     redIndex++;
                     if (redIndex > 4) redIndex = 4;
                     break;
-                case "1":
+                case 1:
                     this.green[greenIndex].BackColor = Color.Green;
                     greenIndex++;
                     if (greenIndex > 4) greenIndex = 4;
                     break;
-                case "2":
+                case 2:
                     this.blue[blueIndex].BackColor = Color.Blue;
                     blueIndex++;
-                    if (redIndex > 4) redIndex = 4;
+                    if (blueIndex > 4) blueIndex = 4;
                     break;
             }
         }
 
-        public void RemoveColor(string color)
+        public void RemoveColor(int color)
         {
             switch (color)
             {
-                case "0":
+                case 0:
                     this.red[redIndex].BackColor = Color.Gray;
                     redIndex--;
                     if (redIndex < 0) redIndex = 0;
                     break;
-                case "1":
+                case 1:
                     this.green[greenIndex].BackColor = Color.Gray;
                     greenIndex--;
                     if (greenIndex < 0) greenIndex = 0;
                     break;
-                case "2":
+                case 2:
                     this.blue[blueIndex].BackColor = Color.Gray;
                     blueIndex--;
                     if (blueIndex < 0) blueIndex = 0;

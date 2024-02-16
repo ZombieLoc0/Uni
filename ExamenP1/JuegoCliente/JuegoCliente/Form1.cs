@@ -18,8 +18,9 @@ namespace JuegoCliente
         int blueCounter = 0;
         int redCounter = 0;
         int greenCounter = 0;
-        string color;
-        Network connection;
+        int iColor;
+
+        Network server;
 
         Game gameController;
         public Form1()
@@ -29,8 +30,21 @@ namespace JuegoCliente
             Panel[] green = { Verde1, Verde2, Verde3, Verde4, Verde5, };
             Panel[] blue = { Azul1, Azul2, Azul3, Azul4, Azul5 };
 
-            gameController = new Game(red, blue, green);
-            
+            gameController = new Game(red, blue, green);    
+        }
+
+        private void ShowDebug(string message)
+        {
+            if (debugBox.InvokeRequired)
+            {
+                // Si estamos en un hilo diferente, invoca el método en el hilo de la interfaz de usuario.
+                debugBox.BeginInvoke(new Action(() => ShowDebug(message)));
+            }
+            else
+            {
+                // Estamos en el hilo de la interfaz de usuario, puedes actualizar el control directamente.
+                debugBox.AppendText("Respuesta: " + message + '\n');
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -38,13 +52,19 @@ namespace JuegoCliente
 
         }
 
+        #region Buttons
+
         private void RojoButton_Click(object sender, EventArgs e)
         {
             redCounter++;
 
             if (redCounter >= 3)
             {
-                gameController.AddColor("0");
+                if (iColor != 0) gameController.RemoveColor(0);
+
+                else gameController.AddColor(0);
+
+                server.SendColor(0.ToString());
                 redCounter = 0;
             }
         }
@@ -55,7 +75,11 @@ namespace JuegoCliente
 
             if (greenCounter >= 3)
             {
-                gameController.AddColor("1");
+                if (iColor != 1) gameController.RemoveColor(1);
+
+                else gameController.AddColor(1);
+
+                server.SendColor(1.ToString());
                 greenCounter = 0;
             }
         }
@@ -66,25 +90,31 @@ namespace JuegoCliente
 
             if (blueCounter >= 3)
             {
-                gameController.AddColor("2");
+                if (iColor != 2) gameController.RemoveColor(2);
+
+                else gameController.AddColor(2);
+
+                server.SendColor(2.ToString());
                 blueCounter = 0;
             }
         }
 
+        #endregion
+
         #region SelectColor
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            color = "0";
+            iColor = 0;
         }
 
         private void checkVerde_CheckedChanged(object sender, EventArgs e)
         {
-            color = "1";
+            iColor = 1;
         }
 
         private void checkAzul_CheckedChanged(object sender, EventArgs e)
         {
-            color = "2";
+            iColor = 2;
         }
         #endregion
        
@@ -92,9 +122,11 @@ namespace JuegoCliente
         {
             while (true)
             {
-                string rcvC = connection.RecieveColor();
-                if (color == rcvC) { gameController.RemoveColor(color); }
-                else gameController.AddColor(color);
+                string msg = server.RecieveColor();
+                
+                if (iColor == int.Parse(msg)) { gameController.RemoveColor(iColor); }
+                else gameController.AddColor(int.Parse(msg));
+                //ShowDebug(msg);
             }
         }
 
@@ -104,11 +136,14 @@ namespace JuegoCliente
             checkRojo.Enabled = false;
             checkVerde.Enabled = false;
 
+            AzulButton.Enabled = true;
+            RojoButton.Enabled = true;
+            VerdeButton.Enabled = true;
+
             //Inicar la conexion
-            connection = new Network(color);
+            server = new Network(iColor.ToString());
             Thread recivirAtaque = new Thread(new ThreadStart(recieveColor));
             recivirAtaque.Start();
         }
-
     }
 }
