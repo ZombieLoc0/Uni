@@ -12,7 +12,7 @@ namespace Chat_Server
     internal class Networking
     {
         const int port = 11000;
-        const string ip = "192.168.100.10";
+        const string ip = "127.0.0.1";
         //UdpClient listener = new UdpClient(port);
 
         IPEndPoint groupEP = new IPEndPoint(IPAddress.Parse(ip), port);

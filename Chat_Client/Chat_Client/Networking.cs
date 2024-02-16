@@ -10,7 +10,7 @@ namespace Chat_Client
 {
     internal class Networking
     {
-        const string IP = "192.168.100.10";
+        const string IP = "127.0.0.1";
         const int port = 11000;
 
         IPEndPoint ep = new IPEndPoint(IPAddress.Parse(IP), port);
